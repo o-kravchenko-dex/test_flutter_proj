@@ -18,8 +18,7 @@ class MyApp extends StatelessWidget {
             foregroundColor: Colors.black,
           ),
         ),
-        home: RandomWords()
-    );
+        home: RandomWords());
   }
 }
 
@@ -44,6 +43,9 @@ class _RandomWordsState extends State<RandomWords> {
               pair.asPascalCase,
               style: _biggerFont,
             ),
+            onTap: () {
+              _push(pair);
+            },
           );
         },
       );
@@ -57,6 +59,20 @@ class _RandomWordsState extends State<RandomWords> {
         body: ListView(
           children: divided,
         ),
+      );
+    }));
+  }
+
+  void _push(WordPair pair) {
+    Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) {
+      return Scaffold(
+        appBar: AppBar(title: const Text('FAVOURITE ITEM')),
+        body: const Align(
+            child: Image(
+          image: NetworkImage('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
+          width: 200,
+          height: 200,
+        )),
       );
     }));
   }
