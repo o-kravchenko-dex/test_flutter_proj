@@ -35,32 +35,32 @@ class _RandomWordsState extends State<RandomWords> {
   final _biggerFont = const TextStyle(fontSize: 25);
 
   void _pushSaved() {
-    Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) {
-      final tiles = _saved.map(
-        (pair) {
-          return ListTile(
-            title: Text(
-              pair.asPascalCase,
-              style: _biggerFont,
-            ),
-            onTap: () {
-              _push(pair);
-            },
-          );
-        },
-      );
-      final divided = tiles.isNotEmpty
-          ? ListTile.divideTiles(tiles: tiles, context: context).toList()
-          : <Widget>[];
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('SavedSuggestions'),
-        ),
-        body: ListView(
-          children: divided,
-        ),
-      );
-    }));
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(builder: (context) {
+        final tiles = _saved.map(
+          (pair) {
+            return ListTile(
+              title: Text(
+                pair.asPascalCase,
+                style: _biggerFont,
+              ),
+              onTap: () => _push(pair),
+            );
+          },
+        );
+        final divided = tiles.isNotEmpty
+            ? ListTile.divideTiles(tiles: tiles, context: context).toList()
+            : <Widget>[];
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('SavedSuggestions'),
+          ),
+          body: ListView(
+            children: divided,
+          ),
+        );
+      }),
+    );
   }
 
   void _push(WordPair pair) {
@@ -69,7 +69,8 @@ class _RandomWordsState extends State<RandomWords> {
         appBar: AppBar(title: const Text('FAVOURITE ITEM')),
         body: const Align(
             child: Image(
-          image: NetworkImage('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
+          image: NetworkImage(
+              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
           width: 200,
           height: 200,
         )),
