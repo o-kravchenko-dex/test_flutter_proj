@@ -64,18 +64,30 @@ class _RandomWordsState extends State<RandomWords> {
   }
 
   void _push(WordPair pair) {
-    Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) {
-      return Scaffold(
-        appBar: AppBar(title: const Text('FAVOURITE ITEM')),
-        body: const Align(
-            child: Image(
-          image: NetworkImage(
-              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
-          width: 200,
-          height: 200,
-        )),
-      );
-    }));
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(builder: (context) {
+        return Scaffold(
+          appBar: AppBar(title: const Text('FAVOURITE ITEM')),
+          body: Container(
+              height: 380,
+              width: 580,
+              color: Colors.deepPurpleAccent,
+              alignment: Alignment.center,
+              margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+              child: Column(
+                children: <Widget>[
+                  Text(pair.asPascalCase),
+                  const Image(
+                    image: NetworkImage(
+                        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
+                    width: 200,
+                    height: 200,
+                  )
+                ],
+              )),
+        );
+      }),
+    );
   }
 
   @override
