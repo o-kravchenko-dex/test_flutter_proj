@@ -1,5 +1,6 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(const MyApp());
@@ -74,20 +75,28 @@ class _RandomWordsState extends State<RandomWords> {
               color: Colors.deepPurpleAccent,
               alignment: Alignment.center,
               margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-              child: Column(
-                children: <Widget>[
-                  Text(pair.asPascalCase),
-                  const Image(
-                    image: NetworkImage(
-                        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
-                    width: 200,
-                    height: 200,
-                  )
-                ],
-              )),
+              child: GestureDetector(
+                  onTap: () {
+                    print(pair);
+                  },
+                  child: Column(
+                    children: <Widget>[
+                      Text(pair.asPascalCase),
+                      const Image(
+                        image: NetworkImage(
+                            'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
+                        width: 200,
+                        height: 200,
+                      )
+                    ],
+                  ))),
         );
       }),
     );
+  }
+
+  Future<http.Response> _fetch() {
+    return http.get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
   }
 
   @override
