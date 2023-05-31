@@ -1,12 +1,17 @@
-
+import 'package:hive/hive.dart';
 import 'package:untitled_flutter_pr/models/base_transaction.dart';
 import 'package:untitled_flutter_pr/shared/helpers/app_randomizer.dart';
 
-class DetailedTransaction extends BaseTransaction {
-  final DateTime date;
-  final double commission;
+part "detailed_transaction.g.dart";
 
-  DetailedTransaction({required super.id})
-      : date = AppRandomizer().getRandomDate(),
-        commission = AppRandomizer().getRandomCommission();
+@HiveType(typeId: 2)
+class DetailedTransaction extends BaseTransaction {
+  @HiveField(4)
+  final DateTime date;
+  @HiveField(5)
+  late final double commission;
+
+  DetailedTransaction({required super.id}) : date = AppRandomizer().getRandomDate() {
+    commission = AppRandomizer().getRandomCommission(super.amount);
+  }
 }

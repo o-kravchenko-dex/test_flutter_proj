@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:untitled_flutter_pr/routes/app_routes.dart';
+import 'package:untitled_flutter_pr/screens/screens.dart';
 import 'package:untitled_flutter_pr/shared/shared.dart';
-import 'package:untitled_flutter_pr/styles/styles.dart';
 
-import '../screens/screens.dart';
 
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 class AppRouter {
   late final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.login,
+    initialLocation: AppRoutes.root,
     navigatorKey: _rootNavigatorKey,
     routes: <RouteBase>[
       ShellRoute(
@@ -28,23 +27,15 @@ class AppRouter {
           GoRoute(
             path: AppRoutes.root,
             parentNavigatorKey: _shellNavigatorKey,
-            pageBuilder: (context, state) => NoTransitionPage(
-              child: Scaffold(
-                body: Center(
-                  child: Text(state.path ?? "aa", style: TextStyle(color: AppColors.green6)),
-                ),
-              ),
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: HomeScreen(title: "aaa11"),
             ),
           ),
           GoRoute(
             path: AppRoutes.graph,
             parentNavigatorKey: _shellNavigatorKey,
-            pageBuilder: (context, state) => NoTransitionPage(
-              child: Scaffold(
-                body: Center(
-                  child: Text(state.location),
-                ),
-              ),
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: GraphScreen(title: "Donut graph"),
             ),
           )
         ],

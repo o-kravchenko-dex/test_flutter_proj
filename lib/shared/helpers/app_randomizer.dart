@@ -30,7 +30,7 @@ class AppRandomizer {
     return _random.nextInt(1000);
   }
 
-  double getRandomCommission() {
+  double getRandomCommission(double amount) {
     return _random.nextInt(10).toDouble();
   }
 }
