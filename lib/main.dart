@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:untitled_flutter_pr/routes/app_router.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+Future<void> initAppTools() async{
+  await Hive.initFlutter();
+}
+
+void main() async {
+  await initAppTools();
+
   runApp(const FlutterTest());
 }
 
