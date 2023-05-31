@@ -1,6 +1,7 @@
 class AppRoutes {
   static String root = "/";
-  static String auth = "/auth";
+
+  static String login = "/login";
 
   static String home = "/home";
   static String graph = "/graphScreen";

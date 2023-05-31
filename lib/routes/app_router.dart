@@ -4,12 +4,14 @@ import 'package:untitled_flutter_pr/routes/app_routes.dart';
 import 'package:untitled_flutter_pr/shared/shared.dart';
 import 'package:untitled_flutter_pr/styles/styles.dart';
 
+import '../screens/screens.dart';
+
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 class AppRouter {
   late final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.root,
+    initialLocation: AppRoutes.login,
     navigatorKey: _rootNavigatorKey,
     routes: <RouteBase>[
       ShellRoute(
@@ -29,7 +31,7 @@ class AppRouter {
             pageBuilder: (context, state) => NoTransitionPage(
               child: Scaffold(
                 body: Center(
-                  child: Text(state.location, style: TextStyle(color: AppColors.green6)),
+                  child: Text(state.path ?? "aa", style: TextStyle(color: AppColors.green6)),
                 ),
               ),
             ),
@@ -47,6 +49,13 @@ class AppRouter {
           )
         ],
       ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: AppRoutes.login,
+        pageBuilder: (context, state) => const NoTransitionPage(
+          child: Login()
+        ),
+      )
     ],
   );
 }
