@@ -4,7 +4,6 @@ import 'package:untitled_flutter_pr/routes/app_routes.dart';
 import 'package:untitled_flutter_pr/screens/screens.dart';
 import 'package:untitled_flutter_pr/shared/shared.dart';
 
-
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
