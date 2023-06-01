@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:untitled_flutter_pr/routes/app_routes.dart';
-import 'package:untitled_flutter_pr/styles/icons/app_icons.dart';
 import 'package:untitled_flutter_pr/styles/styles.dart';
 
 class ScaffoldWithNavBar extends StatefulWidget {
@@ -31,6 +31,18 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
     ),
   ];
 
+  void _onIconTap(int index) {
+    if (index == _currentIndex) return;
+
+    GoRouter router = GoRouter.of(context);
+    String route = tabs[index].initialLocation;
+
+    setState(() {
+      _currentIndex = index;
+    });
+    router.go(route);
+  }
+
   @override
   Widget build(BuildContext context) {
     const labelStyle = TextStyle(fontFamily: 'Roboto');
@@ -39,14 +51,12 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
       bottomNavigationBar: BottomNavigationBar(
         selectedLabelStyle: labelStyle,
         unselectedLabelStyle: labelStyle,
-        selectedItemColor: const Color(0xFF434343),
         selectedFontSize: 12,
+        selectedItemColor: const Color(0xFF434343),
         unselectedItemColor: const Color(0xFF083299),
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
-        onTap: (int index) => setState(() {
-          _currentIndex = index;
-        }),
+        onTap: _onIconTap,
         currentIndex: _currentIndex,
         items: tabs,
       ),

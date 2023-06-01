@@ -1,1 +1,1 @@
-export './bottom_navigation_bar/bottom_navigation_bar.dart';
+export './bottom_navigation_bar/scaffold_with_nav_bar.dart';
