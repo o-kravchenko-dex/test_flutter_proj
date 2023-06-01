@@ -14,7 +14,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leading: withBackButton
           ? IconButton(
-              icon: Icon(AppIcons.back, color: AppColors.blue6),
+              icon: Icon(AppIcons.back, color: AppColors.black),
               onPressed: () {
                 GoRouter router = GoRouter.of(context);
                 return router.pop();
