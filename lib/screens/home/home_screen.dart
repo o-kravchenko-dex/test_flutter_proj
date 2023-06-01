@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled_flutter_pr/bloc/bloc.dart';
 import 'package:untitled_flutter_pr/screens/home/widgets/transaction_item.dart';
 import 'package:untitled_flutter_pr/shared/widgets/label/label.dart';
+import 'package:untitled_flutter_pr/styles/styles.dart';
 
 class HomeScreen extends StatefulWidget {
   final String title;
@@ -34,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Label(widget.title),
+        backgroundColor: AppColors.green6,
       ),
       body: BlocBuilder<TransactionsBloc, TransactionsState>(
         bloc: transactionsBloc,

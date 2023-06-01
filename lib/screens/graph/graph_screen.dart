@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:untitled_flutter_pr/bloc/bloc.dart';
 import 'package:untitled_flutter_pr/models/detailed_transaction.dart';
-import 'package:untitled_flutter_pr/shared/helpers/helpers.dart';
-import 'package:untitled_flutter_pr/shared/widgets/label/label.dart';
+import 'package:untitled_flutter_pr/shared/shared.dart';
 
 class GraphScreen extends StatefulWidget {
   final String title;
@@ -40,9 +39,7 @@ class _GraphScreenState extends State<GraphScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Label(widget.title),
-      ),
+      appBar: BaseAppBar(widget.title),
       body: BlocBuilder<TransactionsBloc, TransactionsState>(
         bloc: transactionsBloc,
         builder: (context, state) {

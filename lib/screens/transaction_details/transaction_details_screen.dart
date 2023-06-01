@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:untitled_flutter_pr/models/detailed_transaction.dart';
 import 'package:untitled_flutter_pr/models/transaction_type.dart';
 import 'package:untitled_flutter_pr/screens/transaction_details/base_text_row.dart';
 import 'package:untitled_flutter_pr/screens/transaction_details/transaction_detail_floating_button.dart';
-import 'package:untitled_flutter_pr/shared/helpers/helpers.dart';
-import 'package:untitled_flutter_pr/shared/widgets/label/label.dart';
+import 'package:untitled_flutter_pr/shared/shared.dart';
 import 'package:untitled_flutter_pr/styles/styles.dart';
 
 class TransactionDetailsScreen extends StatelessWidget {
@@ -16,15 +14,9 @@ class TransactionDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(AppIcons.back, color: AppColors.black),
-          onPressed: () {
-            GoRouter router = GoRouter.of(context);
-            return router.pop();
-          },
-        ),
-        title: Label("Transaction № ${transaction.transactionNumber.toString()}"),
+      appBar: BaseAppBar(
+        "Transaction № ${transaction.transactionNumber.toString()}",
+        withBackButton: true,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: TransactionDetailsFloatingButton(transactionId: transaction.id),
