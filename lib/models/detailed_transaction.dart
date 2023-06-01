@@ -9,9 +9,13 @@ class DetailedTransaction extends BaseTransaction {
   @HiveField(4)
   final DateTime date;
   @HiveField(5)
-  late final double commission;
+  final double commission;
 
-  DetailedTransaction({required super.id}) : date = AppRandomizer().getRandomDate() {
-    commission = AppRandomizer().getRandomCommission(super.amount);
-  }
+  DetailedTransaction({required super.id})
+      : date = AppRandomizer().getRandomDate(),
+        commission = AppRandomizer().getRandomCommission();
+
+  static DetailedTransaction fromJson(Map<String, dynamic> json) => DetailedTransaction(
+        id: json["id"],
+      );
 }

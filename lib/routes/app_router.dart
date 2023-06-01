@@ -27,7 +27,7 @@ class AppRouter {
             path: AppRoutes.root,
             parentNavigatorKey: _shellNavigatorKey,
             pageBuilder: (context, state) => const NoTransitionPage(
-              child: HomeScreen(title: "aaa11"),
+              child: HomeScreen(title: "Transactions"),
             ),
           ),
           GoRoute(

@@ -18,7 +18,7 @@ class DetailedTransactionAdapter extends TypeAdapter<DetailedTransaction> {
     };
     return DetailedTransaction(
       id: fields[3] as int,
-    )..commission = fields[5] as double;
+    );
   }
 
   @override

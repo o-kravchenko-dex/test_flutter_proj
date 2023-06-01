@@ -5,7 +5,6 @@ const baseBoxKey = "baseBox";
 const transactionsBoxKey = "transactions";
 
 class MockDataGenerator {
-
   init() async {
     _generateTransactions();
   }
@@ -18,7 +17,15 @@ class MockDataGenerator {
     await box.put(transactionsBoxKey, transactions);
   }
 
-   void removeTransaction(int transactionId) {
+  Future<List<DetailedTransaction>> getTransactions() async {
+    final baseBox = Hive.box(baseBoxKey);
+
+    final List<DetailedTransaction> transactions = baseBox.get(transactionsBoxKey);
+
+    return transactions;
+  }
+
+  void removeTransaction(int transactionId) {
     final baseBox = Hive.box(baseBoxKey);
 
     final transactionList = baseBox.get(transactionsBoxKey);
