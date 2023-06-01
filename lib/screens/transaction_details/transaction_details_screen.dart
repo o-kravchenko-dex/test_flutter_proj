@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:untitled_flutter_pr/models/detailed_transaction.dart';
 import 'package:untitled_flutter_pr/models/transaction_type.dart';
 import 'package:untitled_flutter_pr/screens/transaction_details/base_text_row.dart';
+import 'package:untitled_flutter_pr/screens/transaction_details/transaction_detail_floating_button.dart';
 import 'package:untitled_flutter_pr/shared/helpers/helpers.dart';
 import 'package:untitled_flutter_pr/shared/widgets/label/label.dart';
 import 'package:untitled_flutter_pr/styles/styles.dart';
@@ -23,8 +24,10 @@ class TransactionDetailsScreen extends StatelessWidget {
             return router.pop();
           },
         ),
-        title: const Label("Transaction"),
+        title: Label("Transaction № ${transaction.transactionNumber.toString()}"),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: TransactionDetailsFloatingButton(transactionId: transaction.id),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(16),

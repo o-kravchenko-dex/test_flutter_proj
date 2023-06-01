@@ -13,12 +13,35 @@ part "transactions_state.dart";
 class TransactionsBloc extends HydratedBloc<TransactionsBlocEvent, TransactionsState> {
   TransactionsBloc() : super(TransactionsState.initial()) {
     on<TransactionsEventLoadData>(_loadTransactionsData);
+    on<TransactionEventDeleteTransaction>(_deleteTransaction);
   }
 
   Future<void> _loadTransactionsData(TransactionsEventLoadData event, Emitter<TransactionsState> emit) async {
     try {
       emit(state.copyWith(loadState: event.loadState, transactionsList: state.transactionsList));
       final transactions = await MockDataGenerator().getTransactions();
+      emit(state.copyWith(loadState: LoadState.idle, transactionsList: transactions));
+      event.asyncCompletionHandler.complete(true);
+    } catch (error) {
+      emit(state.copyWith(
+        loadState: LoadState.error,
+        error: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> _deleteTransaction(TransactionEventDeleteTransaction event, Emitter<TransactionsState> emit) async {
+    try {
+      debugPrint('start deleting');
+
+      emit(state.copyWith(loadState: event.loadState, transactionsList: state.transactionsList));
+
+      MockDataGenerator().removeTransaction(event.transactionId);
+      debugPrint('deleting ${state.transactionsList.toString()} length: ${state.transactionsList?.length.toString()}');
+
+      final transactions = await MockDataGenerator().getTransactions();
+      debugPrint('DELETED ${state.transactionsList.toString()} length: ${state.transactionsList?.length.toString()}');
+
       emit(state.copyWith(loadState: LoadState.idle, transactionsList: transactions));
       event.asyncCompletionHandler.complete(true);
     } catch (error) {

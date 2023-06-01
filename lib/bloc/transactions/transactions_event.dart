@@ -11,3 +11,11 @@ class TransactionsEventLoadData extends TransactionsBlocEvent {
 
   TransactionsEventLoadData({this.loadState = LoadState.loading});
 }
+
+class TransactionEventDeleteTransaction extends TransactionsBlocEvent {
+  final int transactionId;
+  final LoadState loadState;
+  final Completer<bool> asyncCompletionHandler = Completer<bool>();
+
+  TransactionEventDeleteTransaction({this.loadState = LoadState.loading, required this.transactionId});
+}
