@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled_flutter_pr/bloc/bloc.dart';
+import 'package:untitled_flutter_pr/screens/home/widgets/transaction_item.dart';
 import 'package:untitled_flutter_pr/shared/widgets/label/label.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -44,16 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: (context, index) {
                 final transaction = transactions[index];
 
-                return Container(
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    children: [
-                      Label(transaction.type.toString()),
-                      Label(transaction.commission.toString()),
-                      Label(transaction.amount.toString()),
-                    ],
-                  ),
-                );
+                return TransactionItem(transaction);
               },
             );
           }

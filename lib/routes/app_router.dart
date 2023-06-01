@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:untitled_flutter_pr/models/detailed_transaction.dart';
 import 'package:untitled_flutter_pr/routes/app_routes.dart';
 import 'package:untitled_flutter_pr/screens/screens.dart';
 import 'package:untitled_flutter_pr/shared/shared.dart';
@@ -40,11 +41,19 @@ class AppRouter {
         ],
       ),
       GoRoute(
+        path: AppRoutes.transactionDetails,
+        pageBuilder: (context, state) {
+          final navParams = state.extra as DetailedTransaction;
+
+          return (NoTransitionPage(
+            child: TransactionDetailsScreen(navParams),
+          ));
+        },
+      ),
+      GoRoute(
         parentNavigatorKey: _rootNavigatorKey,
         path: AppRoutes.login,
-        pageBuilder: (context, state) => const NoTransitionPage(
-          child: Login()
-        ),
+        pageBuilder: (context, state) => const NoTransitionPage(child: Login()),
       )
     ],
   );
