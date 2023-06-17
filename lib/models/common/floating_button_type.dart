@@ -1,0 +1,4 @@
+enum FloatingButtonType {
+  increment,
+  decrement,
+}

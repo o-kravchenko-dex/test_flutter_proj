@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled_flutter_pr/screens/screens.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,37 +32,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int _tabIndex = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  void _decrementCounter() {
-    setState(() {
-      _counter--;
-    });
-  }
-
-  Widget renderButton(String title) {
-    return GestureDetector(
-      onTap: title == 'increment' ? _incrementCounter : _decrementCounter,
-      child: Container(
-        margin: const EdgeInsets.all(16),
-        decoration: const BoxDecoration(color: Colors.deepPurpleAccent),
-        height: 40,
-        width: 100,
-        child: Center(
-          child: Text(
-            title,
-            style: const TextStyle(color: Colors.white),
-          ),
-        ),
-      ),
-    );
-  }
+  final _tabs = <Widget>[
+    Home(index: 0),
+    Settings(index: 1)
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -70,27 +46,31 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          renderButton('increment'),
-          renderButton('decrement'),
+      bottomNavigationBar: BottomNavigationBar(
+
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home" ),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings" ),
         ],
+        currentIndex: _tabIndex,
+
+        onTap: (index) {
+          if (index != _tabIndex) {
+            setState(() {
+              _tabIndex = index;
+            });
+          }
+        },
       ),
+      body: _tabs[_tabIndex],
+      // floatingActionButton: Row(
+      //   mainAxisAlignment: MainAxisAlignment.center,
+      //   children: [
+      //     HomeFloatingButton(type: FloatingButtonType.increment, onTap: _incrementCounter),
+      //     HomeFloatingButton(type: FloatingButtonType.decrement, onTap: _decrementCounter),
+      //   ],
+      // ),
     );
   }
+
 }
