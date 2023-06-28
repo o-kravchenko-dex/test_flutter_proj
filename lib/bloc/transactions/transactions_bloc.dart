@@ -32,15 +32,12 @@ class TransactionsBloc extends HydratedBloc<TransactionsBlocEvent, TransactionsS
 
   Future<void> _deleteTransaction(TransactionEventDeleteTransaction event, Emitter<TransactionsState> emit) async {
     try {
-      debugPrint('start deleting');
 
       emit(state.copyWith(loadState: event.loadState, transactionsList: state.transactionsList));
 
       MockDataGenerator().removeTransaction(event.transactionId);
-      debugPrint('deleting ${state.transactionsList.toString()} length: ${state.transactionsList?.length.toString()}');
 
       final transactions = await MockDataGenerator().getTransactions();
-      debugPrint('DELETED ${state.transactionsList.toString()} length: ${state.transactionsList?.length.toString()}');
 
       emit(state.copyWith(loadState: LoadState.idle, transactionsList: transactions));
       event.asyncCompletionHandler.complete(true);
