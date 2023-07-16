@@ -1,4 +1,3 @@
-import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Welcome to Flutter',
-      home: RandomWords()
+      home: RandomWords(),
     );
   }
 }
@@ -25,46 +24,35 @@ class RandomWords extends StatefulWidget {
 }
 
 class _RandomWordsState extends State<RandomWords> {
-  final _suggestions = <WordPair>[];
-
-  final _biggerFont = const TextStyle(fontSize: 25);
+  int _count = 0;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Startup name generator'),
-      ),
-      body: _buildSuggestions(),
-    );
-  }
-
-  Widget _buildSuggestions() {
-    return ListView.builder(
-      padding: const EdgeInsets.all(16),
-      itemBuilder: (BuildContext _context, int i) {
-        if (i.isOdd) {
-          return const Divider();
-        }
-
-        final int index = i ~/ 2;
-        if (index >= _suggestions.length) {
-          _suggestions.addAll(generateWordPairs().take(10));
-        }
-        return _buildRow(_suggestions[index]);
-      },
-    );
-  }
-
-  Widget _buildRow(WordPair pair) {
-    return ListTile(
-      title: Text(
-        pair.asPascalCase,
-        style: _biggerFont,
+    return ColoredBox(
+      color: Colors.blueGrey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 1000),
+            child: Text('$_count',
+                key: ValueKey<int>(_count),
+                style: Theme.of(context).textTheme.displayMedium),
+            transitionBuilder: (child, duration) => ScaleTransition(
+              scale: duration,
+              child: child,
+            ),
+          ),
+          ElevatedButton(
+            child: const Text("increment"),
+            onPressed: () {
+              setState(() {
+                _count += 1;
+              });
+            },
+          ),
+        ],
       ),
     );
   }
 }
-
-
-
